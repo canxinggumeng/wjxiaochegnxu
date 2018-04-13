@@ -1,0 +1,147 @@
+/* pages/sdk/index.wxss */
+/**index.wxss**/
+@import "chatlist.wxss";
+.rcd-search-bar{
+  height: 92rpx;
+  background-color: #F0EFF5;
+  padding: 16rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+.rcd-search-fixed{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+.rcd-search-bar-form{
+  background-color: #fff;
+  color: #989B9B;
+  height: 100%;
+  width: 100%;
+  line-height: 60rpx;
+  position: relative;
+  flex-grow: 1;
+}
+.rcd-search-bar-cancel-btn{
+  margin-left: 16rpx;
+  font-size: 17px;
+  color: #09bb07;
+  white-space:nowrap;
+  line-height: 60rpx;
+}
+.rcd-search-bar-box{
+  position:relative;
+  padding-left:60rpx;
+  padding-right:60rpx;
+  width:100%;
+  box-sizing:border-box;
+  z-index:1;
+}
+.rcd-search-bar-box .rcd-search-icon{
+  position: absolute;
+  left: 22rpx;
+  top: 18rpx;
+}
+.rcd-search-bar-input{
+  height: 60rpx; 
+  line-height: 60rpx;
+  font-size: 17px;
+}
+.rcd-search-bar-label{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:2;
+  border-radius:3px;
+  text-align:center;
+  color:#9b9b9b;
+  background:#fff;
+  line-height: 60rpx;
+}
+.rcd-search-bar-label .rcd-search-icon{
+  margin-right: 18rpx;
+}
+.rcd-search-bar-label text{
+  font-size: 17px;
+}
+.rcd-search-bar-result{
+  margin-top:92rpx;
+}
+.rcd-search-bar-result-item{
+  display: flex;
+  padding: 18rpx;
+  height: 90rpx;
+  border-bottom: 1px solid #E9E9E9;
+}
+.rcd-result-avatar{
+  width: 90rpx;
+  height: 90rpx;
+  margin-right: 20rpx;
+  position: relative;
+}
+.rcd-result-avatar image{
+  display: block;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 9rpx;
+}
+.rcd-result-user-name{
+  line-height: 90rpx;
+  font-size: 17px;
+}
+
+
+.rcd-conversation-list {
+  width: 100%;
+  font-family:arial;
+  color:#000;
+  width:100%;
+  overflow-x: hidden;
+}
+.rcd-conversation-item{
+  overflow: hidden;
+  padding-left: 20rpx;
+}
+
+.rcd-test-button{
+  background-color: #108EE9;
+  color: #fff;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  line-height: 100rpx;
+  text-align: center;
+  position: fixed;
+  right: 100rpx;
+  bottom: 100rpx;
+  font-weight: 600;
+}
+.rcd-test-button:active{
+  opacity: 0.8;
+}
+.del {
+  width: 172rpx;
+	background-color: #fd4d4d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:#fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+ }
+ /* 缺省图 */
+ .define {
+   width: 100%;
+   height: 100%;
+
+ }
+ .define img {
+   width: 50%;
+   height:50%;
+ }

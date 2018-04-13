@@ -1,0 +1,98 @@
+<!-- 红包列表页面 -->
+<scroll-view style="width:100%">
+	<view class="header" wx:if="{{length!=0}}"  bindtap='goMore'>
+		  <view>
+		      <image class="icon1" src="../../../images/v010000/icon.png"></image>
+		  </view>
+		  <view>了解更多无界商圈红包</view>
+		  <view>
+		  	  <image class="icon2" src="../../../images/v010000/go.png"></image>
+		  </view>
+	</view>
+    <view class="common_red_bao" wx:if="{{common.length>0}}">
+       <text class="_text">通用红包{{common.length}}</text>
+       <view class="con" wx:for="{{common}}" wx:key="{{item}}" data-id="{{item.id}}" bindtap='goBrandlist'>
+	       <view class="ui_detail">
+	       		 <view class="son">
+	       		 	   <view class="ui-cash">￥{{item.num}}</view>
+	       		 	   <view class="ui-text">通用红包</view>
+	       		 </view>
+	       		 <view class="son">
+	       		 	   <view class="ui-title">{{item.name}}</view>
+	       		 	   <view class="ui-date">{{item.begin_time}}-{{item.expire_at}}</view>
+	       		 	   <view wx:if="{{item.use_scenes==2}}" class="ui-use">可用于品牌加盟费用抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==1}}" class="ui-use">可用于考察定金抵扣抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==3}}" class="ui-use">可用于考察定金或品牌加盟费用抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==0}}" class="ui-use">不限使用期限，全场通用红包</view>
+	       		 </view>
+	       		 <view style="clear:both;height:20rpx"></view>
+	       		 <view style="height:18rpx;background:#fff">
+	       		 	    <image class="icon3" src="../../../images/v010000/18.png"></image>
+	       		 </view>
+	       		 <view class="go-">
+	       		 	    <text class="ui-use" style="padding-left: 20rpx">* 请下载「无界商圈」APP使用红包</text>
+	       		 	    <button class="fr ui-go"  style="opacity: 0">GO</button>
+	       		 </view>
+	       </view>
+	    </view>
+	</view>
+    <view style="height:20rpx"></view>
+	<view class="common_red_bao" wx:if="{{brand.length>0}}">
+       <text class="_text">品牌红包1</text>
+       <view class="con" wx:for="{{brand}}" wx:key="{{item}}" data-id="{{item.id}}" bindtap='goBrandlist'>
+	       <view class="ui_detail">
+	       		 <view class="son">
+	       		 	   <view class="ui-cash">￥1000</view>
+	       		 	   <view class="ui-text">品牌红包</view>
+	       		 </view>
+	       		 <view class="son">
+	       		 	   <view class="ui-title">{{item.name}}</view>
+	       		 	   <view class="ui-date">{{item.begin_time}}-{{item.expire_at}}</view>
+	       		 	   <view wx:if="{{item.use_scenes==2}}" class="ui-use">可用于品牌加盟费用抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==1}}" class="ui-use">可用于考察定金抵扣抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==3}}" class="ui-use">可用于考察定金或品牌加盟费用抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==0}}" class="ui-use">不限使用期限，全场通用红包</view>
+	       		 </view>
+	       		 <view style="clear:both;height:20rpx"></view>
+	       		 <view style="height:18rpx;background:#fff">
+	       		 	    <image class="icon3" src="../../../images/v010000/18.png"></image>
+	       		 </view>
+	       		 <view class="go-">
+	       		 	    <text class="ui-use" style="padding-left: 20rpx">* 请下载「无界商圈」APP使用红包</text>
+	       		 	    <button class="fr ui-go"  style="opacity: 0">GO</button>
+	       		 </view>
+	       </view>
+	    </view>
+	</view>
+	<view style="height:20rpx" wx:if="{{reward.length>0}}"></view>
+	<view class="common_red_bao" wx:if="{{reward.length>0}}">
+       <text class="_text">奖励红包{{reward.length}}</text>
+       <view class="con" wx:for="{{reward}}" wx:key="{{item}}" data-id="{{item.id}}" bindtap='goBrandlist'>
+	       <view class="ui_detail">
+	       		 <view class="son">
+	       		 	   <view class="ui-cash">￥1000</view>
+	       		 	   <view class="ui-text">奖励红包</view>
+	       		 </view>
+	       		 <view class="son">
+	       		 	   <view class="ui-title">{{item.name}}</view>
+	       		 	   <view class="ui-date">{{item.begin_time}}-{{item.expire_at}}</view>
+	       		 	   <view wx:if="{{item.use_scenes==2}}" class="ui-use">可用于品牌加盟费用抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==1}}" class="ui-use">可用于考察定金抵扣抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==3}}" class="ui-use">可用于考察定金或品牌加盟费用抵扣</view>
+	       		 	   <view wx:elif="{{item.use_scenes==0}}" class="ui-use">不限使用期限，全场通用红包</view>
+	       		 </view>
+	       		 <view style="clear:both;height:20rpx"></view>
+	       		 <view style="height:18rpx;background:#fff">
+	       		 	    <image class="icon3" src="../../../images/v010000/18.png"></image>
+	       		 </view>
+	       		 <view class="go-">
+	       		 	    <text class="ui-use" style="padding-left: 20rpx">* 请下载「无界商圈」APP使用红包</text>
+	       		 	    <button class="fr ui-go"  style="opacity: 0">GO</button>
+	       		 </view>
+	       </view>
+	    </view>
+	</view>
+	<view wx:if="{{length==0}}" style="padding-top:200rpx;text-align:center;">
+             <image src="https://api.wujie.com.cn/images/nomessage_icon1.png" style="width:367rpx;height:367rpx;"></image>
+     </view>
+</scroll-view>

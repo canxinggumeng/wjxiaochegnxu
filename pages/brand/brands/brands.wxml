@@ -1,0 +1,54 @@
+<import src="../brandCell/brandCell.wxml"/>
+<view class="section" >
+  <view class="header">
+    <view class="header_search">
+      <input value="" type="text" class="b_search" placeholder="搜索" confirm-type="search" placeholder-class="f26 color9"  maxlength="14"  bindconfirm="searchByWords">
+      <icon type="search" size="23" color="#666" class='serach_icon'></icon>
+      </input>
+    </view>
+    <view class='filters bg_white'>
+      <view class='filter_type' style="border-right:1rpx solid #ccc">
+        <view>
+          <picker  value="{{multiindex}}" range="{{typeArray}}" range-key="name" mode="multiSelector" bindchange="typeFirChange" bindcolumnchange="typeSecChange">
+            <view>
+              <text class='downicon'>{{typeChoose}}</text>
+            </view>
+          </picker>
+        </view>
+        
+      </view>
+      <view class='filter_type'  style="border-right:1rpx solid #ccc">
+        <picker bindchange="moneyChange" value="{{index2}}" range="{{moneyArray}}" range-key="name" mode="selector">
+          <view>
+          <text class='downicon'>{{moneyChoose}}</text>
+          </view>
+        </picker>
+      </view>
+      <view class='filter_type'>
+        <picker bindchange="sortChange" value="{{index3}}" range="{{sortArray}}" range-key="name" mode="selector">
+          <view>
+            <text class='downicon'>{{sortChoose}}</text>
+          </view>
+        </picker>
+        
+      </view>   
+    </view>
+  </view>
+  <scroll-view class="bg_white" style="margin-top:200rpx;" wx:if="{{!nomessage}}">
+    <view wx:for="{{brandList}}" wx:key="item" class="brandcon">
+      <template is="brandCell" data="{{item}}"></template>
+    </view>
+    <view class="tc color9 bottom_text">
+        {{bottomText}}
+    </view>
+      <!-- 回顶部 -->
+    <view class="gotop" bindtap="goTop">
+        <image src="../../../images/v010000/15.png"></image>
+    </view>
+  </scroll-view>
+  
+  
+  <view wx:if="{{nomessage}}" style="padding-top:200rpx;text-align:center;">
+    <image src="https://api.wujie.com.cn/images/nomessage_icon1.png" style="width:367rpx;height:367rpx;"></image>
+  </view>
+</view>

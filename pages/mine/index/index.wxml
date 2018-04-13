@@ -1,0 +1,39 @@
+<!--pages/mine/index/index.wxml-->
+<import src="../../untils/BindPhone/BindPhoneAlter.wxml"></import>
+<view style='background-color: #f2f2f2; border-bottom: 1px solid #d9d9d9'>
+  <view class='user-info'>
+    <image class='user-avtar' src="{{userInfo.avatarUrl}}"/>
+    <view class='user-info-right'>
+      <view class='user-name'>
+         <text>{{userInfo.nickName}}</text> 
+        <text wx:if="{{userInfo.city.length>0}}">, {{userInfo.city}}</text> 
+      </view>
+      <view class='user-id'>ID: {{uid}}</view>
+      <!-- <button class='profile-button' size='mini' bindtap='tapProfileButton'>个人资料</button> -->
+    </view>
+
+    <view class='qCode-scan' bindtap='qCodeScanTap'>
+      <image style='width:26px;height:26px' src='../../../images/mine/sao.png'/>
+    </view>
+  </view>
+
+  <!--  列表  -->
+  <view class='list-container'>
+    <block wx:for="{{list}}">
+    <navigator url="{{item.url}}" class="weui-cell weui-cell_access">  
+      <view  class="weui-cell__hd">
+        <image src="{{item.icon}}"/>
+      </view>
+      <view class="weui-cell__bd">{{item.title}}</view>
+      <view class='weui-cell__ft_in-access'></view> 
+    </navigator>
+    </block>
+  </view>
+</view>
+
+<block wx:if="{{showModal}}"> 
+   <template is="BindPhoneAlter"></template>
+</block>
+
+
+

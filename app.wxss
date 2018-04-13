@@ -1,0 +1,80 @@
+/**app.wxss**/
+@import 'weui.wxss';
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.b{
+  font-weight: bold;
+}
+.f46{
+  font-size: 46rpx;
+}
+.f40{
+  font-weight: 40rpx;
+}
+.f32{
+  font-size: 32rpx;
+}
+.f30{
+  font-size: 30rpx;
+}
+
+.f28{
+  font-size: 28rpx;
+}
+.f26{
+  font-size:26rpx;
+}
+.f24{
+  font-size: 24rpx;
+}
+.f22{
+  font-size: 22rpx;
+}
+.f18{
+  font-size: 18rpx;
+}
+.l{
+  float:left;
+}
+.r{
+  float: right;
+}
+.color6{
+  color:#666
+}
+.color9{
+  color:#999;
+}
+.bg_white{
+  background-color:#fff; 
+}
+.pt20{
+  padding-top:20rpx;
+}
+.pb20{
+  padding-bottom: 20rpx;
+}
+.pl30{
+  padding-left:30rpx;
+}
+.pr30{
+  padding-right: 30rpx;
+}
+.flex-bet{
+  display: flex;
+  justify-content: space-between;
+}
+.flex-start{
+  display: flex;
+  justify-content: flex-start;
+}
+.tc{
+  text-align: center;
+}

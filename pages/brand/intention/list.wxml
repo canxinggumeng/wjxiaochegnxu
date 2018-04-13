@@ -1,0 +1,19 @@
+<import src="../brandCell/brandCell.wxml"/>
+<view class="section" style="padding-top:{{paddingTop}}" wx:if="{{!nomessage}}">
+    <view class="header_search" wx:if="{{showSearch}}">
+      <input value="" type="text" class="b_search" placeholder="搜索" confirm-type="search" placeholder-class="f26 color9"  maxlength="14"  bindconfirm="searchByWords">
+      <icon type="search" size="23" color="#666" class='serach_icon'></icon>
+      </input>
+    </view>
+    <scroll-view class="bg_white" style="padding-top:26rpx;" >
+      <view wx:for="{{brandList}}" wx:key="item">
+        <template is="brandCell" data="{{item}}"></template>
+      </view>
+      <view class="tc color9 bottom_text">
+          {{bottomText}}
+      </view>
+    </scroll-view>
+</view>
+<view wx:if="{{nomessage}}" style="padding-top:200rpx;text-align:center;">
+  <image src="https://api.wujie.com.cn/images/nomessage_icon1.png" style="width:367rpx;height:367rpx;"></image>
+</view>

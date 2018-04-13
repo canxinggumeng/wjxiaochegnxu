@@ -1,0 +1,97 @@
+/* pages/mine/index/index.wxss */
+@import "../../untils/BindPhone/BindPhoneAlter";
+.user-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100px;
+  background-color: white;
+}
+
+.user-info-right {
+  display: block;
+  width: 66%;
+}
+
+.user-avtar {
+  margin: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  border: 1rpx solid #ccc;
+  flex-shrink: 0;
+}
+
+.user-name {
+  margin-top: 22px;
+  margin-right: 15px;
+  height: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(51, 51, 51);
+  overflow: hidden;
+}
+
+.user-id {
+  font-size: 14px;
+  color: rgb(102, 102, 102);
+  margin-top: 5px;
+}
+
+.qCode-scan {
+  margin-top: 15px;
+  margin-right: 15px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.profile-button {
+   margin-top: 15px; 
+   width: 90px;
+   height: 25px;
+   font-size: 12px;
+   color: #ff5a00;
+   background-color: white;
+   align-content: center;
+}
+
+.profile-button::after {
+  border: 1rpx solid #ff5a00;
+}
+
+.list-container {
+  margin-top: 32rpx;
+  background-color: white;
+}
+
+.weui-cell__hd image{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 9rpx;
+    vertical-align: -8rpx;
+  }
+
+.weui-cell__bd {
+   flex-shrink: 0;
+   font-size: 30rpx;
+   color: rgb(51, 51, 51);
+}
+
+.item-detail {
+    font-size: 24rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-detail {
+  margin-top: 30px; 
+  margin-left: 30px;
+  width: 120px;
+  height: 25px;
+  border: 1px red solid;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 15px;
+}

@@ -1,0 +1,212 @@
+
+<import src="../../untils/BindPhone/BindPhoneAlter.wxml"></import>
+<!-- <view class="{{top?'showTop':'hideTop'}}">
+  <text class='look-agent' bindtap="lookAgent">查看经纪人资质</text>
+  <text class='tel-open' wx:if="{{telOpen}}">手机号已公开</text>
+  <button class='tel' bindtap='publicPhone' wx:else>公开手机号</button>
+  <image src='../../../images/icon-close.png' class='icon-close' bindtap="closeTop"></image>
+</view> -->
+<!-- 绑定手机号授权弹窗 -->
+  <view  wx:if="{{showModal}}">
+      <template is="BindPhoneAlter" ></template>  
+  </view>
+<view>
+  <!-- <view class='rcd-conversation-title'>
+        <button class="rcd-toolbar" bindtap="navigateBack">返回</button>
+        <view class="rcd-conversation-title-info">{{"chatRoomId-008"}}</view>
+    </view> -->
+  <scroll-view class="rcd-message-list" scroll-y="true" scroll-top="{{scrollTop}}" scroll-into-view="{{toView}}" style="height:{{scrollHeight}}px;" bindtap="hideEmojis" bindscrolltoupper="refresh" scroll-with-animation="false">
+    <view class='rcd-top-loading' wx:if="{{loading}}">
+      <view class="loadEffect">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </view>
+    </view>
+    <!--rcd-myself为自己发的消息  ''为对方发的消息-->
+    <view id="{{item.messageUId}}" class="rcd-message-list-item  {{item.messageDirection==1?'rcd-myself':''}}" wx:for="{{messageList}}" wx:key="messageList">
+      <view class="rcd-send-time" wx:if="{{item._showTime}}">
+        <text> {{ item.time }} </text>
+      </view>
+      <view class="rcd-avater" wx:if="{{item.messageDirection==1}}" >
+        <image class="rcd-usermotto" src="{{userInfo.avatar ? userInfo.avatar : item.user.icon}}" ></image>
+      </view>
+      <!--发送者头像  -->
+      <view class="rcd-avater" wx:elif="{{item.objectName == 'TY:RedMsg'}}">
+        <image class="rcd-usermotto" src="{{item.user.avatar}}" bindtap="lookAgent"></image>
+      </view>
+      <view class="rcd-avater" wx:elif="{{item.objectName == 'TY:RichMsg'}}">
+        <image class="rcd-usermotto" src="{{item.user.avatar}}" bindtap="lookAgent"></image>
+      </view>
+      <view class="rcd-avater" wx:elif="{{item.user.portrait}}">
+        <image class="rcd-usermotto" src="{{item.user.portrait}}" bindtap="lookAgent"></image>
+      </view>
+      <view class="rcd-avater" wx:elif="{{item.user.icon}}">
+        <image class="rcd-usermotto" src="{{item.user.icon}}" bindtap="lookAgent"></image>
+      </view>
+      <!--发送文本  -->
+      <view class="rcd-message-item-info" wx:if="{{item.objectName == 'RC:TxtMsg' || item.messageType == 'TextMessage'}}">
+        <view class="rcd-arrow rcd-arrow-left">会话框左箭头</view>
+        <text>{{item.content.content}}</text>
+        <view class="rcd-arrow rcd-arrow-right">会话框右箭头</view>
+      </view>
+
+      <!--发送图片  -->
+      <view class="rcd-message-item-image" wx:elif="{{item.objectName == 'RC:ImgMsg'}}">
+        <image src="{{item.content.imageUri}}" mode="aspectFill" binderror="imgLoadError" data-url="{{item.content.imageUri}}" bindtap="viewImg" alt="缩略图" style="width:{{imageWidth}}px; height:{{imageWidth}}px;"></image>
+      </view>
+      <!--自定义文本消息  -->
+      <!--活动邀约  -->
+      <view class="rcd-message-item-info " wx:elif="{{item.objectName == 'TY:RichMsg' && item.content.message.content.type == 5}}" bindtap="clickActivity" data-url="{{item.content.message.content.url}}">
+        <view class="rcd-arrow rcd-arrow-left">会话框左箭头</view>
+        <view class='actMsgCont'>
+          <image src='{{item.content.message.content.imageURL}}' class='activityLogo'></image>
+          <view class='actMsgText'>
+            <text>{{item.content.message.content.digest}}</text>
+          </view>
+        </view>
+        <view class="rcd-arrow rcd-arrow-right">会话框右箭头</view>
+        <view class='dashed'>
+          <text>{{item.content.message.content.title}}</text>
+        </view>
+      </view>
+
+      <!-- 考察邀请函 -->
+      <view class="rcd-message-item-info " wx:elif="{{item.objectName == 'TY:RichMsg' && item.content.message.content.type == 6}}" data-url="{{item.content.message.content.url}}">
+        <view class='masking'></view>
+        <view class="rcd-arrow rcd-arrow-left">会话框左箭头</view>
+        <view class='actMsgCont'>
+          <image src='{{item.content.message.content.imageURL}}' class='activityLogo'></image>
+          <view class='actMsgText'>
+            <text>{{item.content.message.content.digest}}</text>
+          </view>
+        </view>
+        
+        <view class='dashed'> 
+          <text>考察邀请函 -</text>
+          <text>{{item.content.message.content.title}}</text>
+        </view>
+       <view class="rcd-arrow rcd-arrow-right">会话框右箭头</view>
+
+      </view>
+      <!-- 聊天下边的提示语句 -->
+          <view class='rcd-message-item-info-text' wx:if="{{item.objectName == 'TY:RichMsg' && item.content.message.content.type == 6}}">
+          <text>{{item.content.user.name}}</text>
+          <text>{{agentName}} 向您发送了一份考察邀请函，小程序端暂不支持打开，请下载</text>
+          <text style='color: #ff5a00;' bindtap="downApp">无界商圈APP</text>
+          <text>查看</text>
+         </view>
+      <!-- 品牌 -->
+        <view class="rcd-message-item-info " wx:elif="{{item.objectName == 'TY:RichMsg' && item.content.message.content.type == 0}}" bindtap="clickBrand" data-url="{{item.content.message.content.url}}">
+        <view class="rcd-arrow rcd-arrow-left">会话框左箭头</view>
+        <view class='actMsgCont'>
+          <image src='{{item.content.message.content.imageURL}}' class='activityLogo'></image>
+          <view class='actMsgText'>
+            <text>{{item.content.message.content.digest}}</text>
+          </view>
+        </view>
+        <view class="rcd-arrow rcd-arrow-right">会话框右箭头</view>
+        <view class='dashed'>
+          <text>{{item.content.message.content.title}}</text>
+        </view>
+      </view>
+      <!--合同文本  -->
+    
+      <view class="rcd-message-item-info rcd-message-item-contract" wx:elif="{{item.objectName == 'TY:RichMsg' && item.content.message.content.type == 7}}">
+        <!-- 灰色蒙层 -->
+        <view class='masking'></view>
+        <view class="rcd-arrow rcd-arrow-left">会话框左箭头</view>
+        <view class='actMsgCont'>
+          <image src='{{item.content.message.content.imageURL}}' class='activityLogo'></image>
+          <view class='actMsgText contract'>
+            <text>{{item.content.message.content.digest}}</text>
+            <view>
+              <text>总费用:</text>
+              <text style="color:#ff5a00;">{{item.content.message.content.totalCost}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='dashed'>
+          <text>加盟类型 -</text>
+          <text>{{item.content.message.content.joinType}}</text>
+        </view>
+        <view class="rcd-arrow rcd-arrow-right">会话框右箭头</view>
+   
+      </view>
+        <!-- 聊天下边的提示语句 -->
+          <view class='rcd-message-item-info-text' wx:if="{{item.objectName == 'TY:RichMsg' && item.content.message.content.type == 7}}">
+          <text>{{item.content.user.name}}</text>
+          <text>{{agentName}} 向您发送了一份电子加盟合同，小程序端暂不支持打开，请下载</text>
+          <text style='color: #ff5a00;' bindtap="downApp">无界商圈APP</text>
+          <text>查看</text>
+        </view>
+      <!-- <view class="rcd-message-item-image">
+                <image src="../../image/icon-close.png" mode="aspectFill" binderror="imgLoadError" data-url="{{item.content.imageUri}}" bindtap="viewImg" alt="缩略图" style="width:{{imageWidth}}px; height:{{imageWidth}}px;"></image>
+            </view> -->
+            
+      <!-- 发送语音，位置等消息时 -->
+      <view class='rcd-message-item-info-text' wx:if="{{item.content.messageName == 'TY:TipMsg' || item.content.messageName == 'LocationMessage' || item.content.message.objectName == 'TY:RedMsg' || item.content.messageName == 'VoiceMessage'}}" >
+          <text>{{agentName}} 向您发送了一条消息，小程序端暂不支持打开，请下载</text>
+          <text style='color: #ff5a00;' bindtap="downApp">无界商圈APP</text>
+          <text>查看</text>
+        </view>
+    </view>
+    <view id="rcd-to-view" class='rcd-message-other-item'></view>
+  </scroll-view>
+  <view class="rcd-sent-box {{isIpx?'fix-iphonex-button':''}}" style="bottom:{{bottom}}px;">
+    <view class="rcd-sent-input">
+      <!-- <button class="rcd-send-icons rcd-send-voice">图片</button>  -->
+      <form bindreset="sendMessage" bindsubmit="searchSubmit" class='rcd-input-form' id="formChat">
+        <view class='rcd-form-view' style='display: flex;'>
+          <input class="rcd-input-box" bindinput="bindInput" show-confirm-bar="false" confirm-type="send" confirm-hold="{{confirmHold}}" cursor-spacing="{{cursorSpacing}}" value="{{content}}" bindconfirm="sendMessage" bindfocus="inputFocus" bindblur="inputblur"></input>
+          <view class="rcd-send-icons rcd-emoji-pic" bindtap="getEmoji">emoji</view>
+          <!-- <view class="rcd-send-icons rcd-more-function" bindtap="expandMore">更多消息类型 </view> -->
+        </view>
+      </form>
+    </view>
+    <view class="rcd-emoji-list" style="display:{{display}}">
+      <swiper class="rcd-swiper-box" id="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" current="{{current}}">
+        <block wx:for="{{allEmojis}}" wx:key="allEmojis">
+          <swiper-item id="swiper-item">
+            <ul>
+              <li class="rcd-emoji-list-item" style="width:{{emojiWidth}}px;" wx:for="{{item}}" wx:for-item="emoji" wx:key="emoji" bindtap="selectEmoji" data-emoji="{{emoji}}">{{emoji}}</li>
+            </ul>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="rcd-custom-emojis" style="display:{{display}}">自定义表情
+      <ul class="rcd-custom-emojis-list">
+        <!-- <li class="rcd-custom-emojis-item">
+                  <image src="https://rongcloud-image.cn.ronghub.com/aa78b44dd7a31f2138.png?e=2147483647&token=livk5rb3__JZjCtEiMxXpQ8QscLxbNLehwhHySnX:i4A5BAyzUazc8HnR3bxnziVet6Q=" alt="加号"></image>
+                </li> -->
+        <li class="rcd-custom-emojis-item rcd-emoji-icon">
+          <image src="https://rongcloud-image.cn.ronghub.com/c67e074a4eb040859b.png?e=2147483647&token=CddrKW5AbOMQaDRwc3ReDNvo3-sL_SO1fSUBKV3H:tjemaUuf2jNYShzqRWC2VtDtbm8=" alt="emoji"></image>
+        </li>
+        <li class="rcd-send-emoji {{content==''?'':'rcd-can-send'}}" bindtap="sendMessage">发送</li>
+      </ul>
+    </view>
+    <view class="rcd-more-box" style="display:{{moreDisplay}}">
+      <swiper class="rcd-swiper-box" indicator-dots="true" autoplay="false" duration="180" current="0">
+        <swiper-item>
+          <view class='rcd-more-content-line'>
+            <view class='rcd-more-msg-item'>
+              <view class='rcd-more-msg-box' bindtap="sendImage">
+                <view class='rcd-more-msg-box-image'></view>
+              </view>
+              <view class='rcd-more-msg-box-text'>照片</view>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</view>
+<block wx:if="{{showModal}}"> 
+   <template is="BindPhoneAlter"></template>
+</block>

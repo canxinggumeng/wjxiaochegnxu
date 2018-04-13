@@ -1,0 +1,68 @@
+<!--pages/component/money.wxml-->
+<template name="money">
+	    <!--  红包开屏页 -->
+	      <view wx:if="{{initshow==1}}" class="ui_content">
+	      	    <view class="relative">	
+	      	    	  <view class="ui-open" data-tag="{{is_bind}}" bindtap="goNext"></view>
+	      	          <image  src="../../../images/v010000/red.png"></image>
+	      	          <view class="once-open">
+	      	          	<image  src="../../../images/v010000/get.gif"  data-tag="{{is_bind}}" bindtap="goNext"></image>
+	      	          </view>
+	      	    </view>
+	      </view>
+	     <!--  注册电话号码获取红包 -->
+	      <view  wx:elif="{{initshow==2}}" class="ui_content1 ">
+	      		<view class="ui-top">
+	      			<image class="fr" src="../../../images/v010000/off.png" bindtap="offMeng"></image>
+	      		</view>
+	      		<view class="clear con1">
+	      			<text class="ui-text">恭喜获得初创红包</text>
+	      		</view>
+	      		<view style="height:40rpx"></view>
+	      		<view class="ui-middle clear">
+	      			<image  src="../../../images/v010000/19.png"></image>
+	      			<view class="ui-look" style="height:30rpx">
+	      			    <!--  <text>可至"我的-红包"</text>
+	      			     <text>查看红包</text> -->
+	      			</view>
+	      			<view class="phone clear">
+	      				<input class="phonenumber" type="number" placeholder="请输入手机号码" bindinput="bindInputPhone" value="{{phoneNumber}}" maxlength="11" />
+	      			</view>
+	      			<view class="phone1">
+	      			<input class="yannumber" type="number" bindinput="bindInputYanzhenma" value="{{yanzhenNumber}}" 
+	      			     placeholder="请输入验证码"/>
+	      				<!-- <input class="yannumber" type="button" value="获取验证码"  disabled="{{phoneNumber.length==0?true:false}}"/> -->
+	      				 <button type="button" class="{{is_show?'show':'hide'}} fr {{phoneNumber.length==0?'':'bgheighLIght'}}" bindtap="clickVerify">获取验证码</button>
+                         <button type="button" class="{{is_show?'hide':'show'}} fr">{{last_time}}S重新发送</button>
+	      				<!--  <button class="fr">获取验证码</button> -->
+	      			</view>
+                    <view class="click" bindtap="sendPhone">
+                    	点击领取
+                    </view>
+	      		</view>
+	      </view>
+	      <!-- 成功获取这个页面 -->
+	      	<view wx:elif="{{initshow==3}}" class="ui_content1" style="height:635rpx">
+	      		<view class="ui-top">
+	      			<image class="fr" src="../../../images/v010000/off.png" bindtap="offMeng"></image>
+	      		</view>
+	      		<view class="clear con1">
+	      			<text class="ui-text">恭喜获得初创红包</text>
+	      		</view>
+	      		<view style="height:40rpx"></view>
+	      		<view class="ui-middle clear">
+	      			<image  src="../../../images/v010000/22.png"></image>
+	      			<text class="text-redbao">您已获得1000元初创红包</text>
+	      			<view class="ui-look tranform1">
+	      			     <text>可至"我的-红包"</text>
+	      			     <text bindtap="goMyRedList">查看红包</text>
+	      			</view>
+                    <view class="click xialai" style="background: #fff;color:#f61b3b" bindtap="offMeng">
+                    	  我知道了
+                    </view>
+	      		</view>
+	      </view>
+	      <view wx:if="{{nomessage}}" style="padding-top:200rpx;text-align:center;">
+             <image src="https://api.wujie.com.cn/images/nomessage_icon1.png" style="width:367rpx;height:367rpx;"></image>
+          </view>
+</template>

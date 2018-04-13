@@ -1,0 +1,16 @@
+<view>
+     <block wx:for="{{questions}}" >
+       <view style="background-color:#f2f2f2;height:30rpx"></view>
+       <view class="brand_block">
+          <view class='flex-start  ques align-baseline' >
+            <view><image src="/images/ques_icon.png" style="width:24rpx;height:24rpx;margin-right:10rpx;"></image></view>
+              <text class='f30'>{{item.quiz}}</text>
+        </view>
+        <view class='flex-start  align-baseline' >
+          <view><image src="/images/ans_icon.png" style="width:24rpx;height:24rpx;margin-right:10rpx;line-height:2;"></image></view> 
+          <text class='c8a f26 '>{{item.answer}}</text>
+        </view> 
+       </view>
+     </block>
+    <view style="background-color:#f2f2f2;height:30rpx"></view> 
+</view> 

@@ -1,0 +1,26 @@
+<!--pages/brand/brandCell/brandCell.wxml-->
+<template name="brandCell">
+    <view class='brandCell fline' bindtap="toBrandDetail" data-id="{{item.id}}">
+          <view class="transform1">
+            <image class='brandLogo' src='{{item.logo}}'></image>
+          </view>
+          <view class="transform">
+            <text wx:if="{{item.name.length>10}}" class="brandName ui-nowrap-multi">{{item.name}}</text>
+            <text wx:else class='brandName'>{{item.name}}</text>
+            <text class='brandSlogan'>{{item.slogan}}</text>
+            <view class="pl6">
+               <text wx:for="{{item.keywords}}" wx:key="item" class="brandcon keywords">{{item}}</text>
+            </view>
+            <text class="money">{{item.investment_arrange}}</text>
+             <!-- <text class="money">{{item.investment_min}}-{{item.investment_max}}万</text> -->
+           <!--  <text class='brandSummary ui-nowrap-multi'>{{item.detail}}</text> -->
+          </view>
+          <!-- <view class='imageContent'>
+           
+          </view> 
+          <view class='textContent'>
+          
+          </view> -->
+      
+    </view>
+</template>

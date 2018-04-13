@@ -1,0 +1,46 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.91",
+	"appid": "wx907f67c0ba9f545b",
+	"projectname": "%E6%97%A0%E7%95%8C%E5%95%86%E5%9C%88",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "小卡片",
+					"pathName": "pages/index/index",
+					"query": "agent_id=1&id=159&share_unique_id=111521206787132&uid=1261&is_new=1",
+					"scene": "1036",
+					"referrerInfo": {}
+				}
+			]
+		}
+	}
+}

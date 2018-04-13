@@ -1,0 +1,52 @@
+ 
+<view>
+  <!-- <view class='rcd-conversation-title'>
+        <button class="rcd-toolbar" bindtap="navigateBack">返回</button>
+        <view class="rcd-conversation-title-info">{{"chatRoomId-008"}}</view>
+    </view> -->
+  <scroll-view class="rcd-message-list" scroll-y="true" scroll-top="{{scrollTop}}" scroll-into-view="{{toView}}" style="height:{{scrollHeight}}px;" bindtap="hideEmojis" bindscrolltoupper="refresh" scroll-with-animation="false">
+    <view class='rcd-top-loading' wx:if="{{loading}}">
+      <view class="loadEffect">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </view>
+    </view>
+    <!--rcd-myself为自己发的消息  ''为对方发的消息-->
+    <view id="{{item.messageUId}}" class="rcd-message-list-item  {{item.messageDirection==1?'rcd-myself':''}}" wx:for="{{messageList}}" wx:key="messageList">
+      <!-- <view class="rcd-send-time" wx:if="{{item._showTime}}">
+        <text> {{ item.time }} </text>
+      </view> -->
+      <view class="rcd-avater" wx:if="{{item.messageDirection==1}}">
+        <image class="rcd-usermotto" src="{{avatar}}"></image>
+      </view>
+      <!--发送者头像  -->
+      <view class="rcd-avater" wx:else>
+        <image class="rcd-usermotto" src="{{item.avatar}}"></image>
+      </view>
+      <!--发送文本  -->
+      <view class="rcd-message-item-info">
+        <view class="rcd-arrow rcd-arrow-left">会话框左箭头</view>
+        <text>{{item.content}}</text>
+        <view class="rcd-arrow rcd-arrow-right">会话框右箭头</view>
+      </view>
+      <!--自定义文本消息  -->
+    </view>
+    <view id="rcd-to-view" class='rcd-message-other-item'></view>
+  </scroll-view>
+  <view class="rcd-sent-box {{isIpx?'fix-iphonex-button':''}}" style="bottom:{{bottom}}px;">
+    <view class="rcd-sent-input">
+      <!-- <button class="rcd-send-icons rcd-send-voice">图片</button>  -->
+      <form bindreset="sendMessage" bindsubmit="searchSubmit" class='rcd-input-form' id="formXiaoQ">
+        <view class='rcd-form-view' style='display: flex;'>
+          <input type='text' class="rcd-input-box" bindinput="bindInput" show-confirm-bar="false" confirm-type="send" confirm-hold="true" cursor-spacing="{{cursorSpacing}}" value="{{content}}" bindconfirm="sendMessage" bindfocus="inputFocus" placeholder="发送新消息" adjust-position="true" ></input>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

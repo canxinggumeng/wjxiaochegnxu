@@ -1,0 +1,38 @@
+<template name="chatlist" class="container">
+  <view class='content'>
+    <view class='rcd-conversation-content'>
+      <!--头像  -->
+      <view class='rcd-conversation-avatar'>
+        <!--type==1 单聊  -->
+        <block>
+          <!--获取头像  -->
+          <image src="{{item.user.avatar.length?item.user.avatar:'/images/user_avatare.png'}}"></image>
+        </block>
+        <!--未读消息数  -->
+         <view class='rcd-conversation-unread' wx:if="{{item.unreadMessageCount > 0}}">{{item.unreadMessageCount}}</view> 
+        <!-- <view class='rcd-conversation-unread'>{{item.unreadMessageCount}}</view> -->
+      </view>
+
+      <view class='rcd-conversation-info'>
+        <!--用户昵称  -->
+        <view class='rcd-conversation-nickname'>{{item.user.name}}</view>
+        <!--最后一条消息内容  -->
+        <view class="rcd-conversation-msg" wx:if="{{item.objectName == 'RC:LBSMsg'}}">[消息类型不支持]</view>
+        <view class='rcd-conversation-msg' wx:elif="{{item.objectName == 'TY:RedMsg'}}">[红包]</view>
+        <view class='rcd-conversation-msg' wx:elif="{{item.objectName != 'TY:RichMsg'}}">{{item.latestMessage.content.content}}</view>
+        
+        <view class="rcd-conversation-msg" wx:elif="{{item.latestMessage.content.message.content.type == 0}}">[品牌]</view>
+        <view class="rcd-conversation-msg" wx:elif="{{item.latestMessage.content.message.content.type == 5}}">[活动邀请函]</view>
+        <view class="rcd-conversation-msg" wx:elif="{{item.latestMessage.content.message.content.type == 6}}">[考察邀请函]</view>
+        <view class="rcd-conversation-msg" wx:elif="{{item.latestMessage.content.message.content.type == 7}}">[合同邀请函]</view>
+        
+      </view>
+      <!--最后一条消息时间  -->
+      <view class='rcd-conversation-ext'>
+        <text>{{item.latestMessage.time}}</text>
+      </view>
+    </view>
+    
+  </view>
+  
+</template>

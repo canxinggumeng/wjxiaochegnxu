@@ -1,0 +1,53 @@
+<import src="../../untils/BindPhone/BindPhoneAlter.wxml"></import>
+
+<view class='page'>
+<block wx:if="{{nomessage}}">
+<view style="padding-top:200rpx; text-align:center;">
+  <image src="https://api.wujie.com.cn/images/nomessage_icon1.png" style="width:367rpx;height:367rpx;"></image>
+</view>
+</block>
+<block wx:else>
+<view class='list-container'>
+  <block wx:for="{{list}}">  
+  <view class='weui-cell weui-cell_access'>
+    <view class='cell-row'>
+      <view class='weui-cell__bd color333'>活动名称</view>
+      <view class='weui-cell__ft color999 ui-nowrap-multi'>{{item.name}}</view>  
+    </view>
+     <view class='cell-row'>
+      <view class='weui-cell__bd color333'>开始时间</view>
+      <view class='weui-cell__ft color999 ui-nowrap-multi'>{{item.time}}</view>
+    </view>
+    <view class='cell-row'>
+      <view class='weui-cell__bd color333'>票务类型</view>
+      <view class='weui-cell__ft ft_red ui-nowrap-multi'>{{item.ticket_type}} ({{item.ticket_info}})</view>
+    </view>
+    <view class='cell-row'>
+      <view class='weui-cell__bd color333 '>票务状态</view>
+      <view class="weui-cell__ft ui-nowrap-multi {{item.font_red ? 'ft_red' : 'color999'}}">{{item.ticket_status}}</view>
+    </view>
+  </view>
+  <view class='action-view'>
+  <block wx:if="{{item.type=='1'}}">
+    <view class='type0 font15b' bindtap='checkActivityDetail' data-aid="{{item.activity_id}}">
+      查看活动详情
+    </view>
+  </block>
+  <block wx:else="{{item.type=='0'}}">
+    <view class='type1 font15b' bindtap='checkActivityDetail' data-aid="{{item.activity_id}}">
+      查看活动详情
+    </view>
+    <view class='type1 font15b' bindtap='activitySign'>
+      活动签到
+    </view>
+  </block>
+  </view>
+  </block>
+</view>
+</block>
+</view>
+
+<block wx:if="{{showModal}}"> 
+   <template is="BindPhoneAlter"></template>
+</block>
+

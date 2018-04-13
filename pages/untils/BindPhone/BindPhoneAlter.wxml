@@ -1,0 +1,16 @@
+
+<!-- 绑定手机号码弹窗 -->
+<template name="BindPhoneAlter">
+ <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove"></view>
+  <view class="modal-dialog">
+    <view class="modal-title">无界商圈小程序</view>
+    <view class="modal-content">
+      <view class="modal-input"> 
+        <text>您需要绑定手机号，现在绑定</text>
+      </view> 
+    </view>
+    <view class="modal-footer">
+      <button class='btn-login' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">绑定手机号</button>
+    </view>
+  </view>
+</template>

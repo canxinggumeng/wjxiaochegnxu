@@ -1,0 +1,85 @@
+@import"../brandCell/brandCell.wxss";
+page{
+  height: 100%;
+}
+.section{
+  background: #f2f2f2;
+  min-height: 100%;
+  height: 100%;
+}
+.header{
+  width: 100%;
+  background: #f2f2f2;
+  position: fixed;
+  top:0;left: 0;
+  z-index: 10;
+}
+.header_search{
+  padding:16rpx 30rpx;
+}
+.b_search{
+  background: #fff;
+  border-radius: 25rpx;
+  height: 60rpx;
+  padding-left:80rpx;
+  position: relative;
+  font-size: 26rpx;
+  color:#666;
+}
+.serach_icon{
+  position: absolute;
+  left:23rpx;
+  top:10rpx;
+}
+.filters {
+  height: 90rpx;
+  line-height: 90rpx;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+.filter_type{
+  width:33.3%;
+  font-size: 26rpx;
+  text-align: center;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.downicon{
+  position: relative;
+}
+.downicon:after{
+  content: '';
+   width:0;height: 0; 
+  border-top:8rpx solid #ccc;
+  border-left:9rpx solid transparent;
+  border-right:9rpx solid transparent;
+  border-bottom:8rpx solid transparent;
+  position: absolute;
+  right:-20rpx;top:16rpx; 
+}
+.gotop{
+  width:88rpx;
+  height:88rpx;
+  border-radius:50%;
+  position: fixed;
+  right:10rpx;
+  z-index: 1000;
+  bottom:180rpx;
+}
+.gotop image{
+   width:88rpx;
+   height:88rpx;
+   border-radius:50%;
+}
+.bottom_text{
+  height:80rpx;
+  line-height:80rpx;
+  font-size:26rpx;
+  background-color:#f2f2f2;
+  margin-top:-10rpx;
+  color:#999;
+
+}

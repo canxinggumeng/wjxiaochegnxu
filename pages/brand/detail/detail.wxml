@@ -1,0 +1,246 @@
+<import src="../../../wxParse/wxParse.wxml" />
+<import src="../../untils/BindPhone/BindPhoneAlter.wxml" />
+<import src="../../component/money.wxml" />
+<view class="section">
+  <view class="banner">
+    <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner_swiper">
+      <block wx:for="{{imgUrls}}" wx:key="id">
+        <swiper-item>
+          <image src="{{item.src}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- banner图上的抢红包蒙层 -->
+    <view class="packet_module" bindtap="getPacketList" wx:if="{{red_packet}}"> 
+      <view class="l">
+        <image  src='/images/packet_logo.png' mode='scaleToFill' class="packet_logo"></image>
+      </view> 
+      <view class="l packet_text">
+        <text class="colorfff f30">点击抢红包\n</text>
+        <text class="colorfa0 f24">赢取全场红包、品牌专场红包</text> 
+      </view>
+          
+    </view>
+  </view>
+  <view class="company flex-bet align-center">
+    <view class="flex-start align-center">
+      <text class="colorfff company_icon f18">诚信认证</text>
+      <text class="f30">{{companyName}}</text>
+    </view>
+    <view>
+      <image class="collect_img" src="{{collType ? '/images/collect.png' : '/images/un_collect.png' }}" bindtap="getCollect"></image>
+    </view>
+  </view>
+  <view class="nums flex-start align-center">
+    <image class="nums_icon" src='/images/view_icon.png'></image>
+    <text class="color6 f24"><text>浏览</text><text class="color9 ml10">{{views}}</text></text>
+    <image class="nums_icon" src='/images/collect_icon.png'></image>
+    <text class="color6 f24">收藏<text class="color9 ml10">{{collects}}</text></text>
+    <image class="nums_icon" src='/images/zhuan_icon.png'></image>
+    <text class="color6 f24">转发<text class="color9 ml10">{{shares}}</text></text>
+  </view>
+
+  <!-- 第二部分，基本信息 -->
+    <view class="f28 brand_intro">
+      <view class="flex-bet" wx:if="{{min || max}}">
+          <text>加盟费用</text> <text class="color6 flex-right"><text class="cf4d">{{min}} ~ {{max}}</text>万元</text>
+      </view>
+      <view class="flex-bet" wx:if="{{slogn}}">
+          <text>标语</text> <text class="color6 flex-right">{{slogan}}</text>
+      </view>
+      <view class="flex-bet" wx:if="{{category_name}}">
+          <text>行业分类</text> <text class="color6 flex-right">{{category_name}}</text>
+      </view>
+      <view class="flex-bet" wx:if="{{join_area}}">
+          <text>加盟区域</text> <text class="color6 flex-right">{{join_area}}</text>
+      </view>
+      <view class="flex-bet" wx:if="{{store_area}}">
+          <text>店铺面积</text> <text class="color6 flex-right">{{store_area}}</text>
+      </view>
+      <view class="flex-bet" wx:if="{{contract_deadline}}">
+          <text>合同期限</text> <text class="color6 flex-right">{{contract_deadline}}</text>
+      </view>
+      <view class="flex-bet" wx:if="{{shops_num}}">
+          <text>店铺数量</text> <text class="color6 flex-right">{{shops_num}}</text>
+      </view>  
+      <view class="flex-bet" wx:if="{{products}}">
+          <text>主营产品</text>
+          <view class="flex-right">
+            <block wx:for="{{products}}"   wx:key='index' >
+              <text class='color6'>{{item}} </text>
+            </block>
+          </view>
+      </view>                  
+    </view> 
+  <!-- 预估盈利  -->
+    <view class="forecast bg_white" wx:if="{{showForecast}}">
+      <view class="forecast_title">盈利预估</view>
+      <view class="f_table">
+        <block wx:for="{{forecast}}" wx:key='index'>
+          <view class="f_tr" wx:if="{{item.num}}">
+            <view class="f_td">{{item.name}}</view>
+            <view class="f_td">{{item.num}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="tishi">*仅供参考，以实际开店情况为准</view>
+    </view>
+  <!-- 图文详情 -->
+   <view class="brand_block ">
+     <view class="forecast_title">图文详情</view>
+      <template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+   </view>
+   <view class="brand_block">
+     <view class="forecast_title">加盟简介</view>
+     <template is="wxParse" data="{{wxParseData:league.nodes}}" />
+   </view> 
+   <view class="brand_block">
+     <view class="forecast_title">加盟优势</view>
+     <template is="wxParse" data="{{wxParseData:advantage.nodes}}" />
+   </view> 
+   <view class="brand_block">
+     <view class="forecast_title">加盟条件</view>
+     <template is="wxParse" data="{{wxParseData:prerequisite.nodes}}" />
+   </view> 
+  <view class="brand_block">
+     <view class="forecast_title">主打产品</view>
+     <view class="flex-bet f-wrap">
+       <image wx:for="{{show_images}}" wx:key="{{index}}" src="{{item.src}}" class="main_product" data-type="pro" bindtap='showBigpic' data-index="{{index}}"></image>
+     </view>
+     <view class="f28 lh80" wx:if="{{show_proname}}">主打产品</view>
+     <view class="flex-bet f-wrap">
+       <view wx:for="{{detail_images}}" class='pro_name' wx:if="{{item.good_name}}" wx:key="{{id}}" data-type="pro" data-index="{{index}}" bindtap='showBigpic'>{{item.goods_name}}</view>
+     </view>
+   </view> 
+   <view class="brand_block" wx:if="{{show_store}}">
+     <view class="forecast_title">门店实景</view>
+     <view class="flex-bet f-wrap pb20">
+       <image src="{{item.url}}" wx:key="{{item}}" wx:for="{{store_img}}" class="store_view" bindtap='showBigpic' data-type="store" data-index="{{index}}"></image>
+     </view>
+   </view> 
+   <view class="brand_block" wx:if="{{questions.length >0 ? true :false}}" bindtap="toQueList">
+     <view class="forecast_title">问答咨询</view>
+     <block wx:for="{{questions}}" wx:key="{{index}}">
+        <view class='flex-start align-center mb10'>
+          <image src="/images/ques_icon.png" style="width:22rpx;height:22rpx;margin-right:10rpx;"></image>
+          <text class='f30'>{{item.quiz}}</text>
+        </view>
+        <view class='flex-start align-center mb30'>
+          <image src="/images/ans_icon.png" style="width:22rpx;height:22rpx;margin-right:10rpx;line-height:2"></image>
+          <text class='c8a f26 flex-elli'>{{item.answer}}</text>
+        </view> 
+     </block>
+    
+   </view> 
+   <!-- 查看大图 -->
+   <!-- 主营产品 -->
+  <view class="imgModule" wx:if="{{showBigProPic}}" bind:tap='hideBigPic'>
+      <swiper interval="3500" duration="500" current="{{current}}" class="swiperBig" catchtap="stopUp">
+        <block wx:for="{{detail_images}}">
+          <swiper-item>
+              <image src="{{item.src}}" class="slider-image" />
+              <view class="pic_name">{{item.good_name || '暂无描述'}}</view>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+  <!-- 门店实景 -->
+  <view class="imgModule" wx:if="{{showBigStorePic}}" bind:tap='hideBigPic'>
+    <swiper interval="3500" duration="500" current="{{current}}" class="swiperBig" catchtap="stopUp">
+        <block wx:for="{{store_img}}">
+          <swiper-item>
+              <image src="{{item.url}}" class="slider-image" />
+              <view class="pic_name">{{item.introduce || '暂无描述'}}</view>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+
+   <!-- 无界商圈红包砸中你 -->
+        <view class="fixed-bg" wx:if="{{showModule}}"></view>
+        <view class="packet_v29 fixed brand-packet " wx:if="{{showModule}}">
+            <view class="close_v29 tr mb1" >
+                <image src="/images/close.png" class="close_img" bindtap="closeModule"></image>
+            </view>
+            <view class="packet-body" wx:if="{{packet_module}}">
+                <view style="color:#8f694d;text-align:center;font-size:48rpx;padding-top:240rpx" class="f24 tc pt12">
+                    <view class="mb05">恭喜无界商圈</view>
+                    <view style="font-weight: bold;">专属红包砸中了你</view>
+                </view>
+                <view class="" style="margin-top:80rpx;">
+                    <button class="receive" bindtap='getPacket' hover-class="button-hover" >立即领取</button>
+                </view>
+            </view>
+             <!-- 领取的数额 -->
+            <view class="packet_style " wx:if="{{packelist_module}}">
+                <view class="tc white" style="margin-bottom:15rpx">
+                    <view class="f40 mb0">恭喜你获得价值<text >{{packetTotal}}</text>元好礼</view>
+                    <view class="f28">确认领取后，可咨询经纪人具体使用方式</view>
+                </view> 
+                <view id="packet_list" style="max-height:400rpx;overflow: scroll;">
+                  <block wx:for="{{packetList}}" wx:key="{{index}}">
+                    <view class="envelopes" wx:if="{{item.type==1}}">
+                      <view class="color999 tc ">
+                        <!-- 通用红包 -->                     
+                          <view class="f26 l  fund_num">
+                            <view class="mb0">￥<text class="f46">{{m1.newParseInt(item.amount)}}</text></view>
+                            <view class="mb0">全场无条件红包</view>
+                          </view>
+                          <view class="l fund_type">
+                            <view class="mb05 f32 ">不限品牌</view>
+                            <view class="mb0 f26 colorccc">加盟抵扣券</view>
+                          </view>                   
+                      </view>
+                    </view>
+                    <view wx:if="{{item.type == 2}}" class="envelopes">
+                       <view class="color999 tc ">
+                          <view class="f26 l  fund_num">
+                            <view class="mb0">￥<text class="f46">{{item.amount}}</text></view>
+                            <view class="mb0">品牌专享红包</view>
+                          </view>
+                          <view class="l fund_type">
+                            <!-- <view class="mb05 f32 ">不限品牌</view> -->
+                            <view class="mb0 f26 colorccc">{{item.brand_name}}加盟抵扣券</view>
+                          </view>
+                       </view>
+                    </view>
+                  </block>
+                  
+                </view>
+                <!-- <view class="tc mt2">
+                    <a  class="f26 white toFound" style="text-decoration: underline;">点击了解红包使用方式</a>
+                </view> -->
+            </view>
+        </view>
+    <!-- 绑定手机号授权弹窗 -->
+        <view  wx:if="{{showModal}}">
+            <template is="BindPhoneAlter" ></template>  
+        </view>
+    <!-- 初创红包弹窗 -->
+        <view wx:if="{{initshow!=0}}" class="modelCeng">
+            <template is="money" data='{{initshow,is_bind,is_show,last_time,phoneNumber,disable,yanzhenNumber}}'></template>  
+        </view>
+    <!-- 底部按钮 -->
+        <view class="bottom_btn flex-bet">
+          <view class="tc" bindtap="BindPhoneModule">   
+              <image src="/images/bar_home_0.png" style="width:34rpx;height:34rpx;"></image>
+              <view class="f22">首页</view> 
+          </view>
+          <!-- <navigator url="/" hover-class="navigator-hover" open-type="navigate">跳转到新页面</navigator> -->
+          <view>
+           
+            <form bindsubmit="formSubmit" report-submit = 'true'>
+               <input id="plInput" placeholder="please input here" />
+               <button  hover-class="button-hover" class="consult" formType="submit">咨询底价</button>
+            </form>
+          </view>
+        </view>
+</view>
+
+<wxs module="m1">
+  var newParseInt =function(n){
+    return parseInt(n);
+  }
+  module.exports.newParseInt = newParseInt;
+</wxs>

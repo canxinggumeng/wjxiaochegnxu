@@ -1,0 +1,12 @@
+<import src="chatlist.wxml"/>
+<view class="rcd-conversation-list">
+  <view class="rcd-conversation-list">
+  <!--data-targetId:聊天对象的id（融云上的id:如果是经纪人agent+用户id；如果是投资人直接id）    data-conversationType-->
+    <view wx:for="{{conversationList}}" wx:key="*this.targetId" data-targetId="{{item.targetId}}" data-conversationType="{{item.conversationType}}" data-name="{{item.user.name}}" bindtap="naviTo" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} rcd-conversation-item">   
+      <template is="chatlist" data="{{item}}"></template>
+      <!-- <view class="del" catchtap="del" data-index="{{index}}" data-ids="{{item.targetId}}">删除</view> -->
+    </view>
+  </view>
+</view>
+<view class="define" wx:if="{{define}}" style='padding-top:100px;text-align:center;'><image src="../../../images/noImindex.png" style='width:183px;height:183px;'></image></view>
+

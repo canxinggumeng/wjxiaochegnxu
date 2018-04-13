@@ -1,0 +1,39 @@
+<!--pages/brand/list/list.wxml-->
+<import src="../brandCell/brandCell.wxml"/>
+<import src="../../component/money.wxml"/>
+<scroll-view style="width:100%">
+<!-- 轮播图 -->
+<!-- <view > -->
+    <swiper indicator-dots='turue' autoplay='true' circular='true' interval='8000' duration='1000'   class='slide'>
+        <block wx:for="{{imgUrls}}" wx:key="item">
+           <swiper-item>
+                <image  src='{{item.image}}' class='slide-image' data-url="{{item.link_url}}" bindtap='goRouter'></image>
+           </swiper-item>
+        </block>
+     </swiper>
+    <!-- 模块 -->
+    <view class='topic'>
+       <view class='topic-item' wx:for="{{topicList}}" wx:key="item" data-id="{{item.id}}" bindtap="goDetail">
+             <image wx:if="{{item.id==8}}" class="hot-tag" src="../../../images/v010000/21.png"></image>
+             <image class='topic-item-img' src='{{item.logo}}'></image>
+             <text class='topic-item-text gaga'>{{item.name}}</text>
+       </view>
+    </view>
+    <view class="height70 clearfloat"></view>
+    <!-- 回顶部 -->
+    <view class="gotop" bindtap="goTop">
+        <image src="../../../images/v010000/15.png"></image>
+    </view>
+    <view class="title">
+      <text>推荐品牌</text>
+    </view>
+    <!-- 品牌列表 -->
+    <view wx:for="{{brandList}}" wx:key="item" class="brandcon" data-id="{{item.id}}" bindtap='goBrandDetail'>
+          <template is="brandCell" data='{{item}}'></template>
+    </view>
+    <view wx:if="{{getmore}}" class="ui-get-more">下拉加载更多…</view>
+    <view wx:else="{{!getmore}}" class="ui-get-more">已全部加载完毕</view>
+    <view class="modelCeng" wx:if="{{initshow!=0}}">
+         <template is="money" data='{{initshow,is_bind,is_show,last_time,phoneNumber,disable,yanzhenNumber}}'></template>
+    </view>
+</scroll-view>

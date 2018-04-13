@@ -1,0 +1,40 @@
+@import"../brandCell/brandCell.wxss";
+page{
+  height: 100%;
+}
+.section{
+  background: #f2f2f2;
+  min-height: 100%;
+}
+.header{
+  width: 100%;
+  background: #f2f2f2;
+  position: fixed;
+  top:0;left: 0;
+  z-index: 10;
+}
+.header_search{
+  padding:16rpx 30rpx;
+}
+.b_search{
+  background: #fff;
+  border-radius: 25rpx;
+  height: 60rpx;
+  padding-left:80rpx;
+  position: relative;
+  font-size: 26rpx;
+  color:#666;
+}
+.serach_icon{
+  position: absolute;
+  left:23rpx;
+  top:10rpx;
+}
+.bottom_text{
+  height:80rpx;
+  line-height:80rpx;
+  font-size:26rpx;
+  background-color:#f2f2f2;
+  margin-top:-10rpx;
+  color:#999;
+}
